@@ -31,14 +31,14 @@ class App extends React.Component {
   // Cross out task
   toggleTask = id => {
     this.setState(state => ({
-      list: state.list.map(todo => {
-        if (todo.id === id) {
+      list: state.list.map(task => {
+        if (task.id === id) {
           return {
-            ...todo,
-            complete: !todo.complete,
+            ...task,
+            complete: !task.complete,
           };
         } else {
-          return todo;
+          return task;
         }
       })
     }))
@@ -46,20 +46,20 @@ class App extends React.Component {
   // Delete all done tasks
   deleteTasks = () => {
     this.setState(state => ({
-      list: state.list.filter(todo => !todo.complete)
+      list: state.list.filter(task => !task.complete)
     }));
   }
   // Hide or show completed tasks
   toggleTasks = () => {
     this.setState(state => ({
-      list: state.list.map(todo => {
-        if (todo.complete === true) {
+      list: state.list.map(task => {
+        if (task.complete === true) {
           return {
-            ...todo,
-            display: !todo.display
+            ...task,
+            display: !task.display
           }
         } else {
-          return todo;
+          return task;
         }
       })
     }));
@@ -73,7 +73,7 @@ class App extends React.Component {
   // Deletes an item
   deleteItem = (id) => {
     this.setState({
-      list: this.state.list.filter(todo => todo.id !== id)
+      list: this.state.list.filter(task => task.id !== id)
     })
   }
 
@@ -92,18 +92,18 @@ class App extends React.Component {
           </form>
           <div className="list">
             <ul>
-              {this.state.list.map(todo =>
+              {this.state.list.map(task =>
                 <div
-                  key={todo.id} className="listItem"
-                  style={{ display: todo.display ? "none" : "" }}
+                  key={task.id} className="listItem"
+                  style={{ display: task.display ? "none" : "" }}
                 >
                   <li
-                    onClick={() => this.toggleTask(todo.id)}
-                    style={{ textDecoration: todo.complete ? "line-through" : "" }}
+                    onClick={() => this.toggleTask(task.id)}
+                    style={{ textDecoration: task.complete ? "line-through" : "" }}
                   >
-                    <p>{todo.data}</p></li>
+                    <p>{task.data}</p></li>
                   <button
-                    onClick={() => this.deleteItem(todo.id)}
+                    onClick={() => this.deleteItem(task.id)}
                     className="itemBtn">x</button>
                 </div>
               )}
